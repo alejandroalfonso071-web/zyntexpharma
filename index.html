@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZyntexPharma — Catálogo de Productos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue:       #0A5CAB;
+      --blue-dark:  #08468A;
+      --blue-light: #2E80D8;
+      --teal:       #1FB8C3;
+      --teal-light: #4DD0D8;
+      --navy:       #061E3C;
+      --white:      #FFFFFF;
+      --off-white:  #F4F8FD;
+      --gray-100:   #EEF3F9;
+      --gray-300:   #C8D5E4;
+      --gray-500:   #7A93AE;
+      --gray-700:   #3E5570;
+
+      --dolor:    #D94040;
+      --gastro:   #2CA95D;
+      --cardio:   #08468A;
+      --antibio:  #0A5CAB;
+      --diabetes: #E07B20;
+      --neuro:    #6B3FA0;
+      --respir:   #1FB8C3;
+      --gineco:   #C0397A;
+
+      --font: 'Montserrat', sans-serif;
+      --font-body: 'Open Sans', sans-serif;
+      --shadow: 0 6px 32px rgba(10,92,171,.10);
+      --shadow-lg: 0 16px 56px rgba(10,92,171,.18);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--off-white); color: var(--navy); overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--gray-100); }
+    ::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 3px; }
+    .container { max-width: 1220px; margin: 0 auto; padding: 0 32px; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(10,92,171,.08);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: var(--shadow); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-mark {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      border-radius: 9px; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 3px 12px rgba(10,92,171,.3);
+    }
+    .logo-name { font-family: var(--font); font-size: 19px; font-weight: 800; color: var(--navy); letter-spacing: -.01em; }
+    .logo-name span { color: var(--blue); font-weight: 400; }
+    .logo-sub { font-family: var(--font); font-size: 8.5px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gray-500); margin-top: 2px; }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-back { font-family: var(--font); font-size: 12px; font-weight: 700; color: var(--gray-500); text-decoration: none; letter-spacing: .04em; display: flex; align-items: center; gap: 6px; transition: color .2s; }
+    .nav-back:hover { color: var(--blue); }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--blue-light), var(--blue));
+      color: #fff; font-family: var(--font); font-size: 12px; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase;
+      padding: 11px 24px; border: none; border-radius: 30px;
+      cursor: pointer; text-decoration: none;
+      box-shadow: 0 4px 16px rgba(10,92,171,.3);
+      transition: all .25s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(10,92,171,.4); }
+
+    /* ── HERO HEADER ── */
+    .page-hero {
+      padding-top: 72px;
+      background: linear-gradient(150deg, var(--navy) 0%, var(--blue-dark) 45%, var(--blue) 80%, var(--teal) 100%);
+      position: relative; overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0 L80 80 M80 0 L0 80' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E");
+      background-size: 80px 80px;
+    }
+    .page-hero-wave { position: absolute; bottom: -2px; left: 0; right: 0; }
+    .page-hero-inner { position: relative; z-index: 2; padding: 56px 0 90px; text-align: center; }
+    .page-hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+      border-radius: 30px; padding: 6px 18px; margin-bottom: 20px;
+      font-family: var(--font); font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.8);
+    }
+    .page-hero-tag-dot { width: 6px; height: 6px; background: var(--teal-light); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+    .page-hero h1 { font-family: var(--font); font-size: clamp(32px,5vw,58px); font-weight: 900; color: #fff; letter-spacing: -.02em; line-height: 1.1; margin-bottom: 16px; }
+    .page-hero h1 span { color: var(--teal-light); }
+    .page-hero p { font-size: 15px; color: rgba(255,255,255,.65); max-width: 520px; margin: 0 auto 32px; line-height: 1.7; }
+    .hero-stats { display: inline-flex; gap: 0; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; overflow: hidden; }
+    .hero-stat { padding: 16px 32px; border-right: 1px solid rgba(255,255,255,.1); }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-n { font-family: var(--font); font-size: 28px; font-weight: 900; color: #fff; line-height: 1; }
+    .hero-stat-n sup { font-size: 14px; color: var(--teal-light); }
+    .hero-stat-l { font-family: var(--font); font-size: 10px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-top: 4px; }
+
+    /* ── FILTER BAR ── */
+    .filter-bar { background: var(--white); border-bottom: 1px solid var(--gray-100); position: sticky; top: 72px; z-index: 50; box-shadow: 0 2px 12px rgba(10,92,171,.06); }
+    .filter-inner { display: flex; align-items: center; gap: 8px; padding: 14px 0; overflow-x: auto; scrollbar-width: none; }
+    .filter-inner::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--font); font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+      padding: 8px 18px; border-radius: 30px; border: 1.5px solid var(--gray-300);
+      background: transparent; color: var(--gray-500); cursor: pointer; white-space: nowrap;
+      transition: all .2s;
+    }
+    .filter-btn:hover { border-color: var(--blue); color: var(--blue); }
+    .filter-btn.active { border-color: transparent; color: #fff; }
+    .filter-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+    /* ── SECTION TITLES ── */
+    .section-header {
+      display: flex; align-items: center; gap: 20px;
+      margin-bottom: 28px; padding-bottom: 16px;
+      border-bottom: 2px solid;
+    }
+    .section-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .section-title-wrap {}
+    .section-tag { font-family: var(--font); font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 4px; }
+    .section-name { font-family: var(--font); font-size: 22px; font-weight: 900; color: var(--navy); letter-spacing: -.01em; }
+    .section-count { margin-left: auto; font-family: var(--font); font-size: 11px; font-weight: 700; color: var(--gray-500); background: var(--gray-100); padding: 5px 14px; border-radius: 30px; white-space: nowrap; }
+
+    /* ── PRODUCT SECTION ── */
+    .product-section { padding: 56px 0 0; }
+    .product-section:last-child { padding-bottom: 80px; }
+    .product-section.hidden { display: none; }
+
+    /* ── PRODUCT GRID ── */
+    .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media(max-width:1000px) { .products-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:600px)  { .products-grid { grid-template-columns: 1fr; } }
+
+    /* ── PRODUCT CARD ── */
+    .p-card {
+      background: var(--white);
+      border: 1px solid var(--gray-300);
+      border-radius: 14px; overflow: hidden;
+      transition: transform .3s, box-shadow .3s, border-color .3s;
+      position: relative;
+    }
+    .p-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: transparent; }
+    .p-card-top {
+      height: 148px; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .p-card-top::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 50px;
+      background: linear-gradient(to top, var(--white), transparent);
+    }
+    .p-badge {
+      position: absolute; top: 12px; left: 12px; z-index: 2;
+      font-family: var(--font); font-size: 8.5px; font-weight: 800;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: #fff; padding: 4px 11px; border-radius: 30px;
+    }
+    .p-rx {
+      position: absolute; top: 12px; right: 12px; z-index: 2;
+      font-family: var(--font); font-size: 9px; font-weight: 800;
+      letter-spacing: .06em; color: var(--gray-500);
+      background: var(--gray-100); padding: 3px 9px; border-radius: 4px;
+      border: 1px solid var(--gray-300);
+    }
+    .p-body { padding: 16px 20px 20px; }
+    .p-brand { font-family: var(--font); font-size: 9px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 3px; }
+    .p-name { font-family: var(--font); font-size: 24px; font-weight: 900; color: var(--navy); line-height: 1; margin-bottom: 5px; letter-spacing: -.01em; }
+    .p-molecule { font-family: var(--font); font-size: 12px; font-weight: 600; color: var(--gray-500); margin-bottom: 10px; }
+    .p-desc { font-size: 12.5px; line-height: 1.65; color: var(--gray-700); margin-bottom: 16px; }
+    .p-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .p-tag {
+      font-family: var(--font); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 4px;
+    }
+    .p-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-top: 14px; border-top: 1px solid var(--gray-100);
+    }
+    .p-form { display: flex; align-items: center; gap: 7px; }
+    .p-form-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .p-form-label { font-family: var(--font); font-size: 9.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--gray-500); }
+    .p-link { font-family: var(--font); font-size: 11px; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 4px; transition: gap .2s; }
+    .p-link:hover { gap: 8px; }
+
+    /* ── ICON SVGs for cards ── */
+
+    /* ── BACK TO TOP ── */
+    .back-top {
+      position: fixed; bottom: 96px; right: 28px; z-index: 98;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--white); border: 1px solid var(--gray-300);
+      box-shadow: var(--shadow);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; opacity: 0; transition: opacity .3s, transform .3s;
+      text-decoration: none;
+    }
+    .back-top.visible { opacity: 1; }
+    .back-top:hover { transform: translateY(-2px); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy); padding: 36px 0; border-top: 3px solid var(--blue); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .footer-copy { font-size: 12px; color: rgba(255,255,255,.25); }
+    .footer-reg { font-size: 12px; color: rgba(255,255,255,.25); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-mark">
+        <svg width="24" height="24" viewBox="0 0 26 26" fill="none">
+          <path d="M3 3L13 13M23 3L13 13M13 13L3 23M13 13L23 23" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="logo-name">ZYNTEX<span> PHARMA</span></div>
+        <div class="logo-sub">Pharmaceutical Sciences</div>
+      </div>
+    </a>
+    <div class="nav-right">
+      <a href="index.html" class="nav-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Inicio
+      </a>
+      <a href="index.html#contacto" class="btn-primary">Solicitar Catálogo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg"></div>
+  <svg class="page-hero-wave" viewBox="0 0 1440 70" preserveAspectRatio="none" fill="white"><path d="M0,35 C360,70 720,0 1080,35 C1260,52 1380,42 1440,35 L1440,70 L0,70 Z" opacity=".07"/><path d="M0,55 C400,18 800,70 1200,45 C1320,36 1400,50 1440,55 L1440,70 L0,70 Z"/></svg>
+  <div class="page-hero-inner">
+    <div class="container">
+      <div class="page-hero-tag"><span class="page-hero-tag-dot"></span>Portafolio Completo 2025</div>
+      <h1>Catálogo de <span>Productos</span></h1>
+      <p>19 principios activos de alta demanda en 8 líneas terapéuticas, con registros sanitarios vigentes ante MSPAS/DRCPFA de Guatemala.</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-n">19</div>
+          <div class="hero-stat-l">Productos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">8</div>
+          <div class="hero-stat-l">Líneas Terap.</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">22</div>
+          <div class="hero-stat-l">Departamentos</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-n">BPF<sup>✓</sup></div>
+          <div class="hero-stat-l">Certificación</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="container">
+    <div class="filter-inner">
+      <button class="filter-btn active" style="background:var(--blue);border-color:var(--blue)" onclick="filterAll(this)">
+        <span class="filter-dot" style="background:rgba(255,255,255,.6)"></span> Todos (19)
+      </button>
+      <button class="filter-btn" onclick="filterSection('dolor', this)">
+        <span class="filter-dot" style="background:var(--dolor)"></span> Dolor (2)
+      </button>
+      <button class="filter-btn" onclick="filterSection('gastro', this)">
+        <span class="filter-dot" style="background:var(--gastro)"></span> Gastro (3)
+      </button>
+      <button class="filter-btn" onclick="filterSection('cardio', this)">
+        <span class="filter-dot" style="background:var(--cardio)"></span> Cardiovascular (2)
+      </button>
+      <button class="filter-btn" onclick="filterSection('antibio', this)">
+        <span class="filter-dot" style="background:var(--antibio)"></span> Antibióticos (4)
+      </button>
+      <button class="filter-btn" onclick="filterSection('diabetes', this)">
+        <span class="filter-dot" style="background:var(--diabetes)"></span> Diabetes (2)
+      </button>
+      <button class="filter-btn" onclick="filterSection('neuro', this)">
+        <span class="filter-dot" style="background:var(--neuro)"></span> Neurológico (3)
+      </button>
+      <button class="filter-btn" onclick="filterSection('respir', this)">
+        <span class="filter-dot" style="background:var(--respir)"></span> Respiratorio (1)
+      </button>
+      <button class="filter-btn" onclick="filterSection('gineco', this)">
+        <span class="filter-dot" style="background:var(--gineco)"></span> Ginecológico (1)
+      </button>
+      <button class="filter-btn" onclick="filterSection('antibio2', this)">
+        <span class="filter-dot" style="background:#1a7abf"></span> Antibio. Hospital (2)
+      </button>
+    </div>
+  </div>
+</div>
+
+<main style="padding-bottom:0">
+
+<!-- ══════════════════════════════════════════
+     DOLOR / AINE
+══════════════════════════════════════════ -->
+<section class="product-section" data-section="dolor">
+  <div class="container">
+    <div class="section-header reveal" style="border-color:var(--dolor)">
+      <div class="section-icon" style="background:rgba(217,64,64,.12)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dolor)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div class="section-title-wrap">
+        <div class="section-tag" style="color:var(--dolor)">Línea Terapéutica</div>
+        <div class="section-name">Dolor / AINE / Analgésico</div>
+      </div>
+      <div class="section-count">2 productos</div>
+    </div>
+    <div class="products-grid">
+
+      <!-- ZYNEDOL -->
+      <div class="p-card reveal">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#fdeaea,#f7c8c8)">
+          <span class="p-badge" style="background:var(--dolor)">Dolor · AINE</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(217,64,64,.10)" stroke="rgba(217,64,64,.2)" stroke-width="1.5"/>
+            <ellipse cx="38" cy="38" rx="24" ry="11" fill="rgba(217,64,64,.15)" stroke="rgba(217,64,64,.4)" stroke-width="1.5" transform="rotate(-30 38 38)"/>
+            <ellipse cx="38" cy="38" rx="24" ry="11" fill="rgba(217,64,64,.10)" stroke="rgba(217,64,64,.3)" stroke-width="1.5" transform="rotate(30 38 38)"/>
+            <circle cx="38" cy="38" r="8" fill="rgba(217,64,64,.25)" stroke="rgba(217,64,64,.5)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:var(--dolor)">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNEDOL</div>
+          <div class="p-molecule">Dexketoprofeno trometamol 25 mg</div>
+          <p class="p-desc">AINE de nueva generación, enantiómero activo del ketoprofeno. Inicio de acción rápido para dolor agudo moderado a severo: musculoesquelético, dismenorrea y postoperatorio.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(217,64,64,.08);color:var(--dolor)">COX-1 / COX-2</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Film-coated tablets</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">20 Tab</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:var(--dolor)"></div><span class="p-form-label">25 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:var(--dolor)">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZYNACOX -->
+      <div class="p-card reveal" style="transition-delay:.08s">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#fdf0ea,#f7d9c8)">
+          <span class="p-badge" style="background:#C05020">Dolor · COX-2</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(192,80,32,.08)" stroke="rgba(192,80,32,.2)" stroke-width="1.5"/>
+            <path d="M38 16 L58 50 H18 Z" fill="rgba(192,80,32,.14)" stroke="rgba(192,80,32,.35)" stroke-width="1.5" stroke-linejoin="round"/>
+            <circle cx="38" cy="46" r="7" fill="rgba(192,80,32,.25)" stroke="rgba(192,80,32,.5)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:#C05020">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNACOX</div>
+          <div class="p-molecule">Celecoxib 200 mg</div>
+          <p class="p-desc">Inhibidor selectivo de COX-2. Primera elección para artritis reumatoide y osteoartritis con menor riesgo gastrointestinal que los AINEs no selectivos.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(192,80,32,.08);color:#C05020">Inhibidor selectivo COX-2</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Cápsulas</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">30 Cáps</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:#C05020"></div><span class="p-form-label">200 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:#C05020">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     GASTRO
+══════════════════════════════════════════ -->
+<section class="product-section" data-section="gastro">
+  <div class="container">
+    <div class="section-header reveal" style="border-color:var(--gastro)">
+      <div class="section-icon" style="background:rgba(44,169,93,.12)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gastro)" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="section-title-wrap">
+        <div class="section-tag" style="color:var(--gastro)">Línea Terapéutica</div>
+        <div class="section-name">Gastroentereología / Úlcera / Reflujo</div>
+      </div>
+      <div class="section-count">3 productos</div>
+    </div>
+    <div class="products-grid">
+
+      <!-- ZYNDEXPRAZOL -->
+      <div class="p-card reveal">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#e8f8ee,#c8edd9)">
+          <span class="p-badge" style="background:var(--gastro)">Gastro · IBP</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(44,169,93,.10)" stroke="rgba(44,169,93,.2)" stroke-width="1.5"/>
+            <rect x="32" y="18" width="14" height="40" rx="7" fill="rgba(44,169,93,.2)" stroke="rgba(44,169,93,.45)" stroke-width="1.5"/>
+            <rect x="18" y="32" width="40" height="14" rx="7" fill="rgba(44,169,93,.12)" stroke="rgba(44,169,93,.3)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:var(--gastro)">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNDEXPRAZOL</div>
+          <div class="p-molecule">Dexlansoprazol 30 mg</div>
+          <p class="p-desc">IBP de doble liberación retardada. Tecnología Dual Delayed Release para control ácido prolongado 24h. Indicado para ERGE, esofagitis erosiva y pirosis nocturna.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(44,169,93,.08);color:var(--gastro)">Bomba de Protones</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Doble liberación</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">28 Cáps</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:var(--gastro)"></div><span class="p-form-label">30 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:var(--gastro)">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZYNECID -->
+      <div class="p-card reveal" style="transition-delay:.08s">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#eef8f2,#d0eedc)">
+          <span class="p-badge" style="background:#228A4A">Gastro · Antiácido</span>
+          <span class="p-rx">OTC</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(34,138,74,.08)" stroke="rgba(34,138,74,.18)" stroke-width="1.5"/>
+            <path d="M22 48 C22 36 28 28 38 28 C48 28 54 36 54 48" fill="none" stroke="rgba(34,138,74,.35)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M26 52 C26 42 31 35 38 35 C45 35 50 42 50 52" fill="rgba(34,138,74,.15)" stroke="rgba(34,138,74,.4)" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:#228A4A">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNECID</div>
+          <div class="p-molecule">Hidróxido Al/Mg + Simeticona 400 mg</div>
+          <p class="p-desc">Antiácido combinado de acción rápida. Neutraliza la acidez gástrica y elimina gases. Alivio sintomático inmediato de gastritis, acidez y meteorismo.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(34,138,74,.08);color:#228A4A">Antiácido + Carminativo</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Tabletas masticables</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">OTC</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:#228A4A"></div><span class="p-form-label">400 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:#228A4A">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZYNPRID -->
+      <div class="p-card reveal" style="transition-delay:.16s">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#e8f5ee,#bde8cc)">
+          <span class="p-badge" style="background:#1E7A45">Gastro · Procinético</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(30,122,69,.07)" stroke="rgba(30,122,69,.18)" stroke-width="1.5"/>
+            <path d="M20 38 C20 28 28 22 38 22 C48 22 56 28 56 38" fill="none" stroke="rgba(30,122,69,.3)" stroke-width="1.5"/>
+            <path d="M24 42 C28 54 48 54 52 42" fill="rgba(30,122,69,.12)" stroke="rgba(30,122,69,.35)" stroke-width="1.5"/>
+            <circle cx="38" cy="38" r="7" fill="rgba(30,122,69,.2)" stroke="rgba(30,122,69,.45)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:#1E7A45">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNPRID</div>
+          <div class="p-molecule">Domperidona 10 mg</div>
+          <p class="p-desc">Antagonista periférico de dopamina con efecto procinético. Acelera el vaciamiento gástrico. Indicado para náuseas, vómitos y gastroparesia funcional.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(30,122,69,.08);color:#1E7A45">Procinético · Antiemético</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Tabletas</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">30 Tab</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:#1E7A45"></div><span class="p-form-label">10 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:#1E7A45">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     CARDIOVASCULAR
+══════════════════════════════════════════ -->
+<section class="product-section" data-section="cardio">
+  <div class="container">
+    <div class="section-header reveal" style="border-color:var(--cardio)">
+      <div class="section-icon" style="background:rgba(8,70,138,.10)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--cardio)" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <div class="section-title-wrap">
+        <div class="section-tag" style="color:var(--cardio)">Línea Terapéutica</div>
+        <div class="section-name">Cardiovascular / Hipertensión / Dislipidemia</div>
+      </div>
+      <div class="section-count">2 productos</div>
+    </div>
+    <div class="products-grid">
+
+      <!-- ZYNVAST -->
+      <div class="p-card reveal">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#e8eef8,#c8d5ed)">
+          <span class="p-badge" style="background:var(--cardio)">Cardio · Estatina</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(8,70,138,.07)" stroke="rgba(8,70,138,.18)" stroke-width="1.5"/>
+            <polyline points="14,50 24,30 32,42 40,22 50,38 62,28" fill="none" stroke="rgba(8,70,138,.45)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:var(--cardio)">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNVAST</div>
+          <div class="p-molecule">Atorvastatina cálcica 20 mg</div>
+          <p class="p-desc">Inhibidor de HMG-CoA reductasa de mayor potencia. Reduce LDL hasta 46%. Indicado en hipercolesterolemia primaria y prevención cardiovascular primaria y secundaria.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(8,70,138,.08);color:var(--cardio)">Inhibidor HMG-CoA</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Film-coated tablets</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">30 Tab</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:var(--cardio)"></div><span class="p-form-label">20 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:var(--cardio)">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZYNPRIL -->
+      <div class="p-card reveal" style="transition-delay:.08s">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#eaf0f9,#c5d6ee)">
+          <span class="p-badge" style="background:#063A7A">Cardio · IECA</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(6,58,122,.07)" stroke="rgba(6,58,122,.18)" stroke-width="1.5"/>
+            <path d="M38 54 C38 54 20 43 20 31 A10.5 10.5 0 0 1 38 27 A10.5 10.5 0 0 1 56 31 C56 43 38 54 38 54Z" fill="rgba(6,58,122,.18)" stroke="rgba(6,58,122,.4)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:#063A7A">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNPRIL</div>
+          <div class="p-molecule">Enalapril maleato 10 mg</div>
+          <p class="p-desc">Inhibidor de la enzima convertidora de angiotensina (IECA). Primera línea en HTA, insuficiencia cardíaca y nefroprotección en diabetes tipo 2.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(6,58,122,.08);color:#063A7A">IECA · Vasodilatador</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Tabletas</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">30 Tab</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:#063A7A"></div><span class="p-form-label">10 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:#063A7A">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ANTIBIÓTICOS ORALES
+══════════════════════════════════════════ -->
+<section class="product-section" data-section="antibio">
+  <div class="container">
+    <div class="section-header reveal" style="border-color:var(--antibio)">
+      <div class="section-icon" style="background:rgba(10,92,171,.10)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--antibio)" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <div class="section-title-wrap">
+        <div class="section-tag" style="color:var(--antibio)">Línea Terapéutica</div>
+        <div class="section-name">Antibióticos / Anti-infecciosos Orales</div>
+      </div>
+      <div class="section-count">4 productos</div>
+    </div>
+    <div class="products-grid">
+
+      <!-- ZYNEXIMA -->
+      <div class="p-card reveal">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#eaf2fd,#c8ddf5)">
+          <span class="p-badge" style="background:var(--antibio)">Antibiótico · Oral</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(10,92,171,.07)" stroke="rgba(10,92,171,.18)" stroke-width="1.5"/>
+            <polygon points="38,16 46,30 62,30 50,42 54,58 38,48 22,58 26,42 14,30 30,30" fill="rgba(10,92,171,.14)" stroke="rgba(10,92,171,.35)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:var(--antibio)">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNEXIMA</div>
+          <div class="p-molecule">Cefalexina 500 mg</div>
+          <p class="p-desc">Cefalosporina de primera generación oral. Bactericida por inhibición de síntesis de pared celular. Infecciones respiratorias, dérmicas, urinarias y óseas leves-moderadas.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(10,92,171,.08);color:var(--antibio)">Cefalosporina 1ª gen.</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Cápsulas</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">20 Cáps</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:var(--antibio)"></div><span class="p-form-label">500 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:var(--antibio)">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZYNCLAV -->
+      <div class="p-card reveal" style="transition-delay:.08s">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#e8f0fc,#c2d4f5)">
+          <span class="p-badge" style="background:#0848A0">Antibiótico · Betalactámico</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(8,72,160,.07)" stroke="rgba(8,72,160,.18)" stroke-width="1.5"/>
+            <rect x="26" y="22" width="24" height="32" rx="8" fill="rgba(8,72,160,.14)" stroke="rgba(8,72,160,.35)" stroke-width="1.5"/>
+            <line x1="38" y1="29" x2="38" y2="45" stroke="rgba(8,72,160,.5)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="31" y1="37" x2="45" y2="37" stroke="rgba(8,72,160,.5)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:#0848A0">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNCLAV</div>
+          <div class="p-molecule">Amoxicilina + Ácido Clavulánico 875/125 mg</div>
+          <p class="p-desc">Betalactámico de amplio espectro protegido. El ácido clavulánico inhibe betalactamasas bacterianas. Infecciones respiratorias, sinusitis, otitis, IVU complicadas.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(8,72,160,.08);color:#0848A0">Betalactámico protegido</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Film-coated tablets</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">14 Tab</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:#0848A0"></div><span class="p-form-label">875/125 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:#0848A0">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZYNFLOX -->
+      <div class="p-card reveal" style="transition-delay:.16s">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#e6edf9,#bccce8)">
+          <span class="p-badge" style="background:#093F80">Antibiótico · Quinolona</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(9,63,128,.07)" stroke="rgba(9,63,128,.18)" stroke-width="1.5"/>
+            <circle cx="38" cy="38" r="16" fill="none" stroke="rgba(9,63,128,.3)" stroke-width="1.5"/>
+            <circle cx="38" cy="38" r="8" fill="rgba(9,63,128,.18)" stroke="rgba(9,63,128,.4)" stroke-width="1.5"/>
+            <line x1="38" y1="8" x2="38" y2="22" stroke="rgba(9,63,128,.3)" stroke-width="1.5"/>
+            <line x1="38" y1="54" x2="38" y2="68" stroke="rgba(9,63,128,.3)" stroke-width="1.5"/>
+            <line x1="8" y1="38" x2="22" y2="38" stroke="rgba(9,63,128,.3)" stroke-width="1.5"/>
+            <line x1="54" y1="38" x2="68" y2="38" stroke="rgba(9,63,128,.3)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:#093F80">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNFLOX</div>
+          <div class="p-molecule">Ciprofloxacino HCl 500 mg</div>
+          <p class="p-desc">Fluoroquinolona de segunda generación. Inhibidor de ADN-girasa bacteriana. Amplio espectro gramnegativo. IVU complicadas, infecciones gastrointestinales y óseas.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(9,63,128,.08);color:#093F80">Fluoroquinolona 2ª gen.</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Film-coated tablets</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">10 Tab</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:#093F80"></div><span class="p-form-label">500 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:#093F80">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZYNMACIN -->
+      <div class="p-card reveal" style="transition-delay:.24s">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#e4ecf8,#b8cce5)">
+          <span class="p-badge" style="background:#0A3D70">Antibiótico · Macrólido</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(10,61,112,.07)" stroke="rgba(10,61,112,.18)" stroke-width="1.5"/>
+            <ellipse cx="38" cy="38" rx="22" ry="10" fill="rgba(10,61,112,.12)" stroke="rgba(10,61,112,.3)" stroke-width="1.5" transform="rotate(-45 38 38)"/>
+            <ellipse cx="38" cy="38" rx="22" ry="10" fill="rgba(10,61,112,.08)" stroke="rgba(10,61,112,.22)" stroke-width="1.5" transform="rotate(45 38 38)"/>
+            <circle cx="38" cy="38" r="6" fill="rgba(10,61,112,.25)" stroke="rgba(10,61,112,.5)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:#0A3D70">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNMACIN</div>
+          <div class="p-molecule">Azitromicina 500 mg</div>
+          <p class="p-desc">Macrólido de nueva generación con efecto antiinflamatorio adicional. Esquema de 3 días. Infecciones respiratorias altas y bajas, faringoamigdalitis y neumonía atípica.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(10,61,112,.08);color:#0A3D70">Macrólido 15-membros</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Film-coated tablets</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">3 Tab</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:#0A3D70"></div><span class="p-form-label">500 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:#0A3D70">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     ANTIBIÓTICOS HOSPITALARIOS
+══════════════════════════════════════════ -->
+<section class="product-section" data-section="antibio2">
+  <div class="container">
+    <div class="section-header reveal" style="border-color:#1a7abf">
+      <div class="section-icon" style="background:rgba(26,122,191,.10)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1a7abf" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="section-title-wrap">
+        <div class="section-tag" style="color:#1a7abf">Línea Terapéutica</div>
+        <div class="section-name">Antibióticos / Anti-infecciosos Hospitalarios</div>
+      </div>
+      <div class="section-count">2 productos</div>
+    </div>
+    <div class="products-grid">
+
+      <!-- ZYNBACTEM -->
+      <div class="p-card reveal">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#e2edf9,#b5ccee)">
+          <span class="p-badge" style="background:#1a7abf">Hospital · IV/IM</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(26,122,191,.07)" stroke="rgba(26,122,191,.2)" stroke-width="1.5"/>
+            <rect x="30" y="20" width="16" height="36" rx="5" fill="rgba(26,122,191,.14)" stroke="rgba(26,122,191,.35)" stroke-width="1.5"/>
+            <rect x="20" y="30" width="36" height="16" rx="5" fill="rgba(26,122,191,.08)" stroke="rgba(26,122,191,.25)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:#1a7abf">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNBACTEM</div>
+          <div class="p-molecule">Ampicilina + Sulbactam 750 mg</div>
+          <p class="p-desc">Betalactámico + inhibidor de betalactamasas inyectable. Polvo para solución IV/IM. Infecciones intrahospitalarias, neumonía nosocomial e infecciones polimicrobianas.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(26,122,191,.08);color:#1a7abf">Betalactámico · Hospital</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Polvo inyectable</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">IV / IM</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:#1a7abf"></div><span class="p-form-label">750 mg · IV/IM</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:#1a7abf">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZYNROCEL -->
+      <div class="p-card reveal" style="transition-delay:.08s">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#dde8f5,#aec5e8)">
+          <span class="p-badge" style="background:#145FA0">Hospital · Oral/IV</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(20,95,160,.07)" stroke="rgba(20,95,160,.18)" stroke-width="1.5"/>
+            <path d="M20 38 L32 26 L44 38 L32 50 Z" fill="rgba(20,95,160,.14)" stroke="rgba(20,95,160,.35)" stroke-width="1.5"/>
+            <path d="M32 38 L44 26 L56 38 L44 50 Z" fill="rgba(20,95,160,.09)" stroke="rgba(20,95,160,.25)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:#145FA0">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNROCEL</div>
+          <div class="p-molecule">Cefuroxima axetilo 500 mg</div>
+          <p class="p-desc">Cefalosporina de segunda generación oral. Mayor estabilidad frente a betalactamasas que las de 1ª gen. Sinusitis, otitis media, faringitis y neumonía adquirida en comunidad.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(20,95,160,.08);color:#145FA0">Cefalosporina 2ª gen.</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Film-coated tablets</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">10 Tab</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:#145FA0"></div><span class="p-form-label">500 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:#145FA0">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     DIABETES
+══════════════════════════════════════════ -->
+<section class="product-section" data-section="diabetes">
+  <div class="container">
+    <div class="section-header reveal" style="border-color:var(--diabetes)">
+      <div class="section-icon" style="background:rgba(224,123,32,.12)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--diabetes)" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M2 12h20"/></svg>
+      </div>
+      <div class="section-title-wrap">
+        <div class="section-tag" style="color:var(--diabetes)">Línea Terapéutica</div>
+        <div class="section-name">Diabetes / Metabolismo / Glucemia</div>
+      </div>
+      <div class="section-count">2 productos</div>
+    </div>
+    <div class="products-grid">
+
+      <!-- ZYNMET -->
+      <div class="p-card reveal">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#fdf2e8,#f5d8b0)">
+          <span class="p-badge" style="background:var(--diabetes)">Diabetes · Biguanida</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(224,123,32,.08)" stroke="rgba(224,123,32,.2)" stroke-width="1.5"/>
+            <path d="M24 50 L38 20 L52 50" fill="none" stroke="rgba(224,123,32,.4)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="28" y1="42" x2="48" y2="42" stroke="rgba(224,123,32,.4)" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:var(--diabetes)">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNMET</div>
+          <div class="p-molecule">Metformina HCl 850 mg</div>
+          <p class="p-desc">Biguanida de primera línea en DM tipo 2. Reduce gluconeogénesis hepática y mejora sensibilidad a insulina. Sin riesgo de hipoglucemia. Efecto cardioprotector demostrado.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(224,123,32,.08);color:var(--diabetes)">Biguanida · 1ª línea DM2</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Tabletas recubiertas</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">30 Tab</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:var(--diabetes)"></div><span class="p-form-label">850 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:var(--diabetes)">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZYNGLYX -->
+      <div class="p-card reveal" style="transition-delay:.08s">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#faeee0,#f0cfa0)">
+          <span class="p-badge" style="background:#B85A10">Diabetes · Sulfonilurea</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(184,90,16,.07)" stroke="rgba(184,90,16,.2)" stroke-width="1.5"/>
+            <ellipse cx="38" cy="38" rx="20" ry="12" fill="rgba(184,90,16,.12)" stroke="rgba(184,90,16,.3)" stroke-width="1.5"/>
+            <ellipse cx="38" cy="38" rx="12" ry="20" fill="rgba(184,90,16,.08)" stroke="rgba(184,90,16,.22)" stroke-width="1.5"/>
+            <circle cx="38" cy="38" r="5" fill="rgba(184,90,16,.3)" stroke="rgba(184,90,16,.55)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:#B85A10">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNGLYX</div>
+          <div class="p-molecule">Glibenclamida 5 mg</div>
+          <p class="p-desc">Sulfonilurea de segunda generación. Estimula secreción de insulina pancreática. Útil en DM tipo 2 con función residual de células beta. Costo-efectiva en combinación con metformina.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(184,90,16,.08);color:#B85A10">Sulfonilurea 2ª gen.</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Tabletas</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">30 Tab</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:#B85A10"></div><span class="p-form-label">5 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:#B85A10">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     NEUROLÓGICO
+══════════════════════════════════════════ -->
+<section class="product-section" data-section="neuro">
+  <div class="container">
+    <div class="section-header reveal" style="border-color:var(--neuro)">
+      <div class="section-icon" style="background:rgba(107,63,160,.10)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--neuro)" stroke-width="2" stroke-linecap="round"><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/><circle cx="12" cy="12" r="10"/></svg>
+      </div>
+      <div class="section-title-wrap">
+        <div class="section-tag" style="color:var(--neuro)">Línea Terapéutica</div>
+        <div class="section-name">Neurológico / Neuropatía / Neurotrófico</div>
+      </div>
+      <div class="section-count">3 productos</div>
+    </div>
+    <div class="products-grid">
+
+      <!-- ZYNAXON -->
+      <div class="p-card reveal">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#f0eaf8,#dac8f0)">
+          <span class="p-badge" style="background:var(--neuro)">Neuro · Neurotrófico</span>
+          <span class="p-rx">OTC</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(107,63,160,.07)" stroke="rgba(107,63,160,.18)" stroke-width="1.5"/>
+            <path d="M38 18 C38 18 28 24 28 34 C28 40 32 42 38 44 C44 42 48 40 48 34 C48 24 38 18 38 18Z" fill="rgba(107,63,160,.14)" stroke="rgba(107,63,160,.35)" stroke-width="1.5"/>
+            <line x1="38" y1="44" x2="38" y2="58" stroke="rgba(107,63,160,.4)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="32" y1="52" x2="44" y2="52" stroke="rgba(107,63,160,.3)" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:var(--neuro)">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNAXON</div>
+          <div class="p-molecule">Tiamina B1 + Piridoxina B6 + Cianocobalamina B12</div>
+          <p class="p-desc">Complejo neurotrópico de alta dosis. Cofactores esenciales en la síntesis de mielina y conducción axonal. Neuropatía diabética, neuritis, cervicalgia y lumbociatalgia.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(107,63,160,.08);color:var(--neuro)">Complejo Neurotrópico</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Tabletas recubiertas</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">30 Tab</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:var(--neuro)"></div><span class="p-form-label">B1/B6/B12 · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:var(--neuro)">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZYNGABAL -->
+      <div class="p-card reveal" style="transition-delay:.08s">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#ece5f5,#d0bce8)">
+          <span class="p-badge" style="background:#5A2E90">Neuro · Gabapentinoide</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(90,46,144,.07)" stroke="rgba(90,46,144,.18)" stroke-width="1.5"/>
+            <path d="M18 44 C22 32 28 28 38 28 C48 28 54 32 58 44" fill="none" stroke="rgba(90,46,144,.3)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M24 50 C27 40 32 35 38 35 C44 35 49 40 52 50" fill="rgba(90,46,144,.14)" stroke="rgba(90,46,144,.38)" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="38" cy="38" r="5" fill="rgba(90,46,144,.28)" stroke="rgba(90,46,144,.55)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:#5A2E90">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNGABAL</div>
+          <div class="p-molecule">Pregabalina 75 mg</div>
+          <p class="p-desc">Gabapentinoide análogo del GABA. Modula canales de calcio voltaje-dependientes. Neuropatía diabética periférica, neuralgia postherpética, fibromialgia y dolor neuropático central.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(90,46,144,.08);color:#5A2E90">Gabapentinoide · α2δ</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Cápsulas</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">28 Cáps</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:#5A2E90"></div><span class="p-form-label">75 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:#5A2E90">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     RESPIRATORIO
+══════════════════════════════════════════ -->
+<section class="product-section" data-section="respir">
+  <div class="container">
+    <div class="section-header reveal" style="border-color:var(--respir)">
+      <div class="section-icon" style="background:rgba(31,184,195,.12)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--respir)" stroke-width="2" stroke-linecap="round"><path d="M12 2C8 2 4 6 4 10c0 4 2 6 4 8l4 4 4-4c2-2 4-4 4-8 0-4-4-8-8-8z"/></svg>
+      </div>
+      <div class="section-title-wrap">
+        <div class="section-tag" style="color:var(--respir)">Línea Terapéutica</div>
+        <div class="section-name">Respiratorio / Broncodilatador / Alergia</div>
+      </div>
+      <div class="section-count">1 producto</div>
+    </div>
+    <div class="products-grid">
+
+      <!-- ZYNHALER -->
+      <div class="p-card reveal">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#e4f7f8,#b8eaec)">
+          <span class="p-badge" style="background:var(--respir)">Respir. · Broncodilatador</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(31,184,195,.08)" stroke="rgba(31,184,195,.2)" stroke-width="1.5"/>
+            <path d="M24 44 C24 36 28 26 38 24 C48 26 52 36 52 44" fill="none" stroke="rgba(31,184,195,.35)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M28 50 C28 42 32 34 38 32 C44 34 48 42 48 50" fill="rgba(31,184,195,.14)" stroke="rgba(31,184,195,.4)" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="38" cy="38" r="6" fill="rgba(31,184,195,.25)" stroke="rgba(31,184,195,.5)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:var(--respir)">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNHALER</div>
+          <div class="p-molecule">Salbutamol sulfato 2 mg</div>
+          <p class="p-desc">Agonista β2-adrenérgico selectivo de acción corta. Broncodilatación rápida en crisis asmáticas y EPOC. Relajación del músculo liso bronquial en minutos. Presentación oral.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(31,184,195,.08);color:var(--respir)">Agonista β2-SABA</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Tabletas</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">30 Tab</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:var(--respir)"></div><span class="p-form-label">2 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:var(--respir)">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     GINECOLÓGICO
+══════════════════════════════════════════ -->
+<section class="product-section" data-section="gineco">
+  <div class="container">
+    <div class="section-header reveal" style="border-color:var(--gineco)">
+      <div class="section-icon" style="background:rgba(192,57,122,.10)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gineco)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="5"/><path d="M12 13v8m-3-3h6"/></svg>
+      </div>
+      <div class="section-title-wrap">
+        <div class="section-tag" style="color:var(--gineco)">Línea Terapéutica</div>
+        <div class="section-name">Ginecología / Anticoncepción / Salud Femenina</div>
+      </div>
+      <div class="section-count">1 producto</div>
+    </div>
+    <div class="products-grid">
+
+      <!-- ZYNORGEST -->
+      <div class="p-card reveal">
+        <div class="p-card-top" style="background:linear-gradient(135deg,#faeaf3,#f0b8d8)">
+          <span class="p-badge" style="background:var(--gineco)">Gineco · Progestágeno</span>
+          <span class="p-rx">Rx</span>
+          <svg width="76" height="76" viewBox="0 0 76 76" fill="none">
+            <circle cx="38" cy="38" r="30" fill="rgba(192,57,122,.07)" stroke="rgba(192,57,122,.18)" stroke-width="1.5"/>
+            <circle cx="38" cy="30" r="14" fill="rgba(192,57,122,.12)" stroke="rgba(192,57,122,.3)" stroke-width="1.5"/>
+            <line x1="38" y1="44" x2="38" y2="58" stroke="rgba(192,57,122,.4)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="31" y1="53" x2="45" y2="53" stroke="rgba(192,57,122,.35)" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="p-body">
+          <div class="p-brand" style="color:var(--gineco)">ZYNTEX PHARMA</div>
+          <div class="p-name">ZYNORGEST</div>
+          <div class="p-molecule">Levonorgestrel 0.75 mg</div>
+          <p class="p-desc">Progestágeno sintético de alta potencia. Anticoncepción de emergencia hasta 72h post-coito. Actúa inhibiendo o retrasando la ovulación. Alta eficacia con esquema de 2 dosis.</p>
+          <div class="p-tags">
+            <span class="p-tag" style="background:rgba(192,57,122,.08);color:var(--gineco)">Progestágeno · 19-nor</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">Tabletas</span>
+            <span class="p-tag" style="background:var(--gray-100);color:var(--gray-700)">2 Tab · 0.75 mg</span>
+          </div>
+          <div class="p-footer">
+            <div class="p-form"><div class="p-form-dot" style="background:var(--gineco)"></div><span class="p-form-label">0.75 mg · Oral</span></div>
+            <a href="index.html#contacto" class="p-link" style="color:var(--gineco)">Consultar <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+    <span class="footer-copy">© 2025 ZyntexPharma · Todos los derechos reservados</span>
+    <span class="footer-reg">Registros sanitarios vigentes ante MSPAS/DRCPFA · Guatemala</span>
+  </div>
+</footer>
+
+<!-- BACK TO TOP -->
+<a href="#" class="back-top" id="backTop" title="Subir">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+</a>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/50200000000" target="_blank"
+   style="position:fixed;bottom:28px;right:28px;z-index:99;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);transition:transform .25s"
+   onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('navbar');
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', scrollY > 20);
+    backTop.classList.toggle('visible', scrollY > 400);
+  });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  }), { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Filter
+  const allSections = document.querySelectorAll('.product-section');
+
+  function filterAll(btn) {
+    allSections.forEach(s => s.classList.remove('hidden'));
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.remove('active');
+      b.style.background = '';
+      b.style.borderColor = '';
+      b.style.color = '';
+    });
+    btn.classList.add('active');
+    btn.style.background = 'var(--blue)';
+    btn.style.borderColor = 'var(--blue)';
+    btn.style.color = '#fff';
+  }
+
+  function filterSection(section, btn) {
+    allSections.forEach(s => {
+      s.classList.toggle('hidden', s.dataset.section !== section);
+    });
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.remove('active');
+      b.style.background = '';
+      b.style.borderColor = '';
+      b.style.color = '';
+    });
+    btn.classList.add('active');
+    const dot = btn.querySelector('.filter-dot');
+    const color = dot ? dot.style.background : 'var(--blue)';
+    btn.style.background = color;
+    btn.style.borderColor = color;
+    btn.style.color = '#fff';
+    window.scrollTo({ top: 140, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
